@@ -14,17 +14,9 @@
 <script>
 
 let getName = function () {
-  this.$http.get = ("http://localhost:8090/trainer/testpackage",
-      {
-        params: {
-          questionSet: this.questionSet
-        }
-      })
+  this.$http.get("http://localhost:8090/trainer/testpackage")
       .then(result => this.questionSet = result.data)
-      .then(displayQuestions(questionSet))
 }
-
-
 
 export default {
   name: 'javaTrainer',
