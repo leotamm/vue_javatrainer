@@ -1,24 +1,46 @@
 <template>
+
   <div class="about">
     <h1>Welcome to javaTrainer</h1>
     <h2>Student view</h2>
-    <input v-model.name="studentName" placeholder="Sisesta nimi" type="text">
+    <input v-model.name="studentName" placeholder="Sisest nimi" type="text">
     <p>
-      <button v-on:click="getName()">Genereeri test</button>
+      <button v-on:click="getName()" :disabled="isDisabled">GENEREERI TEST</button>
+
     </p>
 
-    <table width="500px" align="centre" border="1" v-for="(a, index) in questionSet">
-      <tr><td>Küsimus {{index+1}}: {{ a.question }}</td></tr>
+
+    <table width="450px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff"
+           v-for="(a, index) in questionSet">
       <tr>
-      <div v-for="b in a.answers">
-
-        <td>{{ b.answer }}</td>
-          <td><input id="radio1" type="radio" v-model="a.selectedAnswer" v-bind:value="b.answerId" v-bind:name="index"></td>
-
-      </div>
+        <td>Küsimus {{ index + 1 }}: {{ a.question }}</td>
       </tr>
+
+
+      <tr>
+        <div v-for="b in a.answers">
+
+          <td>
+            <table width="430px">{{ b.answer }}</table>
+          </td>
+          <td><input id="radio1" type="radio" v-model="a.selectedAnswer" v-bind:value="b.answerId" v-bind:name="index">
+          </td>
+
+        </div>
+      </tr>
+
     </table>
-  {{questionSet}}
+
+    <p>
+      <button v-on:click="submit()">SAADA VASTUSED</button>
+
+    </p>
+
+
+    {{ questionSet }}
+
+    <br><br>
+
   </div>
 </template>
 
@@ -27,23 +49,44 @@
 let getName = function () {
   this.$http.get("http://localhost:8090/trainer/testpackage")
       .then(result => this.questionSet = result.data)
+  this.isDisabled = true;
+
 }
+let submit = function () {
+
+  let url = "http://localhost:8090/trainer/submitAnswer";
+  let requestBody = {studentName: this.studentName, resultObject: []};
+
+  for (let i = 0; i < this.questionSet.length; i++) {
+    requestBody.resultObject.push({questionId: this.questionSet[i].q_id, answerId: this.questionSet[i].selectedAnswer});
+    //push lisab lõppu ühe elemendi
+
+  }
+
+  this.$http.post(url, requestBody)
+      .then()
+
+
+}
+
 
 export default {
   name: 'javaTrainer',
   methods: {
-    getName: getName
+    getName: getName,
+    submit: submit
 
   },
   data: function () {
     return {
       studentName: '',
-      questionSet: {}
+      questionSet: {},
+      isDisabled: false
+
+
     }
   },
-  created() {
-    this.getName()
-  }
+
 }
 </script>
 
