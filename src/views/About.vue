@@ -6,7 +6,6 @@
     <input v-model.name="studentName" placeholder="Sisest nimi" type="text">
     <p>
       <button v-on:click="getName()" :disabled="isDisabled">GENEREERI TEST</button>
-
     </p>
 
 
@@ -16,7 +15,6 @@
         <td>Küsimus {{ index + 1 }}: {{ a.question }}</td>
       </tr>
 
-
       <tr>
         <div v-for="b in a.answers">
 
@@ -25,7 +23,6 @@
           </td>
           <td><input id="radio1" type="radio" v-model="a.selectedAnswer" v-bind:value="b.answerId" v-bind:name="index">
           </td>
-
         </div>
       </tr>
 
@@ -33,12 +30,19 @@
 
     <p>
       <button v-on:click="submit()">SAADA VASTUSED</button>
-
     </p>
+<!--
+    <table width="450px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff"
+           v-for="(a, index) in resultList">
+      <tr>
+        <td>
+          <table width="430px">{{ a.testScore }}</table> indeksil 7 ???
+        </td>
+      </tr>
+    </table>
 
-
-    {{ questionSet }}
-
+        {{ questionSet }}  -->
+    {{ resultList }}
     <br><br>
 
   </div>
@@ -64,7 +68,7 @@ let submit = function () {
   }
 
   this.$http.post(url, requestBody)
-      .then()
+      .then(result => this.resultList = result.data)
 
 
 }
@@ -81,6 +85,7 @@ export default {
     return {
       studentName: '',
       questionSet: {},
+      resultList: {},
       isDisabled: false
 
 
