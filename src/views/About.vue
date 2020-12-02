@@ -11,8 +11,8 @@
 
     <table width="450px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff"
            v-for="(a, index) in questionSet">
-      <tr v-bind:class="{correct: a.correct}">
-        <td>Küsimus {{ index + 1 }}: {{ a.question }}             <div style="color: blue" >{{a.correct}}</div></td>
+      <tr class=default v-bind:class="{correct: a.correct, notcorrect: !a.correct}">
+        <td>Küsimus teemast {{ index + 1 }}: <br> <h4>{{ a.question }}</h4>              <div style="color: blue" ></div></td>
       </tr>
 
       <tr>
@@ -88,9 +88,7 @@ let submit = function () {
           for(let i = 0; i < this.resultList.answers.length; i++){
             this.questionSet[i].correct  =this.resultList.answers[i].correct;
           }
-          if (this.a.correct) {
 
-          }
 
       })
 
@@ -130,11 +128,16 @@ export default {
 
 
 <style>
+.default {
+  background-color: cornsilk;
+
+}
   .correct{
 
-    background-color: #adff2f;
+    background-color: #d3ff8f;
   }
   .notcorrect {
-    background-color: indianred;
+    background-color: #ffc8c8;
   }
+
 </style>
