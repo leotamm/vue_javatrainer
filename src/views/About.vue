@@ -5,7 +5,7 @@
     <h2>Student view</h2>
     <input v-model.name="studentName" placeholder="Sisest nimi" type="text">
     <p>
-      <button v-on:click="getName()" :disabled="isDisabled">GENEREERI TEST</button>
+      <button v-on:click="getName()" :disabled="isDisabled" @click="changeSet('show')">GENEREERI TEST</button>
     </p>
 
 
@@ -28,8 +28,8 @@
 
     </table>
 
-    <p>
-      <button v-on:click="submit()">SAADA VASTUSED</button>
+    <p v-if="state === 'show'">
+      <button v-on:click="submit()" >SAADA VASTUSED</button>
     </p>
 <!--
     <table width="450px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff"
@@ -71,10 +71,8 @@ let getName = function () {
 
 }
 let submit = function () {
-
   let url = "http://localhost:8090/trainer/submitAnswer";
   let requestBody = {studentName: this.studentName, resultObject: []};
-
   for (let i = 0; i < this.questionSet.length; i++) {
     requestBody.resultObject.push({questionId: this.questionSet[i].q_id, answerId: this.questionSet[i].selectedAnswer});
     //push lisab lõppu ühe elemendi
@@ -88,8 +86,6 @@ let submit = function () {
           for(let i = 0; i < this.resultList.answers.length; i++){
             this.questionSet[i].correct  =this.resultList.answers[i].correct;
           }
-
-
       })
 
 
@@ -104,21 +100,20 @@ export default {
   name: 'javaTrainer',
   methods: {
     getName: getName,
-    submit: submit
+    submit: submit,
+    changeSet: function(newState){
+      this.state = newState
+    }
 
   },
   data: function () {
     return {
+      state: 'hide',
       studentName: '',
       questionSet: {},
       resultList: {},
       isDisabled: false,
-      score: '',
-
-
-
-
-
+      score: ''
 
     }
   },
@@ -133,7 +128,6 @@ export default {
 
 }
   .correct{
-
     background-color: #d3ff8f;
   }
   .notcorrect {
