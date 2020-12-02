@@ -11,7 +11,7 @@
 
     <table width="450px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff"
            v-for="(a, index) in questionSet">
-      <tr class=default v-bind:class="{correct: a.correct, notcorrect: !a.correct}">
+      <tr class=default v-bind:class="{correct: a.correct, notcorrect: !a.correct && hasSubmitButton=== true}">
         <td>Küsimus teemast {{ index + 1 }}: <br> <h4>{{ a.question }}</h4>              <div style="color: blue" ></div></td>
       </tr>
 
@@ -71,6 +71,7 @@ let getName = function () {
 
 }
 let submit = function () {
+  this.hasSubmitButton = true;
   let url = "http://localhost:8090/trainer/submitAnswer";
   let requestBody = {studentName: this.studentName, resultObject: []};
   for (let i = 0; i < this.questionSet.length; i++) {
@@ -113,7 +114,8 @@ export default {
       questionSet: {},
       resultList: {},
       isDisabled: false,
-      score: ''
+      score: '',
+      hasSubmitButton: false
 
     }
   },
