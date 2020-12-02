@@ -43,8 +43,11 @@
 
         {{ questionSet }}  -->
     {{ resultList }}
+    <div v-for="row in resultList.answers">
+      {{row.questionId}}
+    </div>
+<!--    {{resultList.totalResult.testScore}}-->
     <br><br>
-
   </div>
 </template>
 
