@@ -12,7 +12,7 @@
     <table width="450px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff"
            v-for="(a, index) in questionSet">
       <tr>
-        <td>Küsimus {{ index + 1 }}: {{ a.question }}</td>
+        <td>Küsimus {{ index + 1 }}: {{ a.question }}             {{a.correct}}</td>
       </tr>
 
       <tr>
@@ -42,11 +42,22 @@
     </table>
 
         {{ questionSet }}  -->
-    {{ resultList }}
-    <div v-for="row in resultList.answers">
-      {{row.questionId}}
+<!--    {{ resultList }}-->
+    <br>
+    <br>
+<!--    {{questionSet}}-->
+    <div id="tulemus">
+{{score}}
+
+<!--      {{row.questionId}}-->
     </div>
-<!--    {{resultList.totalResult.testScore}}-->
+
+
+<!--    <div v-for="row in resultList.answers">-->
+<!--      Sinu tulemus on : {{resultList.totalResult.testScore}} %-->
+<!--      &lt;!&ndash;      {{row.questionId}}&ndash;&gt;-->
+<!--    </div>-->
+
     <br><br>
   </div>
 </template>
@@ -71,7 +82,17 @@ let submit = function () {
   }
 
   this.$http.post(url, requestBody)
-      .then(result => this.resultList = result.data)
+      .then(result => {
+          this.resultList = result.data
+          this.score = "Sinu tulemus on : " + this.resultList.totalResult.testScore + "% !"
+          for(let i = 0; i < this.resultList.answers.length; i++){
+            this.questionSet[i].correct  =this.resultList.answers[i].correct;
+          }
+      })
+
+
+
+
 
 
 }
@@ -89,7 +110,8 @@ export default {
       studentName: '',
       questionSet: {},
       resultList: {},
-      isDisabled: false
+      isDisabled: false,
+      score: ''
 
 
     }
