@@ -3,7 +3,7 @@
   <div class="about">
     <h1>Welcome to javaTrainer</h1>
     <h2>Student view</h2>
-    <input v-model.name="studentName" placeholder="Sisest nimi" type="text">
+    <input v-model.name="studentName" placeholder="Sisest nimi" type="text" :disabled="isDisabled">
     <p>
       <button v-on:click="getName()" :disabled="isDisabled" @click="changeSet('show')">GENEREERI TEST</button>
     </p>

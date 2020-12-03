@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/javaTrainer">javaTrainer</router-link>
+      <router-link to="/">javaTrainer Home</router-link> |
+      <router-link to="/javaTrainer">Student</router-link> |
+      <router-link to="/coach">Coach</router-link>
     </div>
     <router-view/>
   </div>
