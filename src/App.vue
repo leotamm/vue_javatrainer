@@ -3,7 +3,8 @@
     <div id="nav">
       <router-link to="/">javaTrainer Home</router-link> |
       <router-link to="/javaTrainer">Student</router-link> |
-      <router-link to="/coach">Coach</router-link>
+      <router-link to="/coach">Coach</router-link>|
+      <router-link to="/login">Login</router-link>
     </div>
     <router-view/>
   </div>
