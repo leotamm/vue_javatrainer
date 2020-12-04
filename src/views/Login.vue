@@ -21,8 +21,6 @@ export default {
   name: 'Login',
   data: function () {
     return {
-
-
       response: '',
       input: {
         username: '',
@@ -40,18 +38,30 @@ export default {
       if (this.input.username === "" && this.input.password === "") {
         console.log("Sisselogimisel peavad nimi ja parool olema sisestatud!");
       } else {
-        console.log("testtest"); //siia viide POST funktsioonile
+        let url = "http://localhost:8090/trainer/login"
+        let requestBody = {
+          userName: this.input.username,
+          userPassword: this.input.password,
+          userClass: ''
+        }
+        console.log(requestBody)
+        this.$http.post(url, requestBody)
+            .then(result => {
+              this.response = result.data
+              alert('Sisse logitud!')
+            })
       }
-    },
+    }
+    ,
     create() {
       if (this.input.newuser === "" && this.input.newpassword === "") {
         console.log("Uue kasutaja nimi ja parool olema sisestatud!");
       } else {
         let url = "http://localhost:8090/trainer/newUser"
         let requestBody = {
-            userName: this.input2.newuser,
-            userPassword: this.input2.newpassword,
-            userClass: 'user'
+          userName: this.input2.newuser,
+          userPassword: this.input2.newpassword,
+          userClass: 'user'
         }
         console.log(requestBody)
         this.$http.post(url, requestBody)
@@ -63,6 +73,7 @@ export default {
     }
   }
 }
+
 
 </script>
 
