@@ -1,20 +1,15 @@
 <template>
 
   <div class="about">
-    <h1>Hello Coach!</h1>
+    <h1>Hei, õpetaja!</h1> <!-- peale sisselogimist, kuvame kujul "Hei, [nimi]!" -->
 
-    <p>
-      <button v-on:click="getResultList" >Värskenda tulemusi</button>
-    </p>
+    <p><button v-on:click="getResultList" >VAATA TULEMUSI</button></p>
 
     <ul align="centre">
       <h3> <a href="http://localhost:8090/" target="_blank" rel="noopener">Küsimuste sisestamine andmebaasi</a> </h3>
     </ul>
 
-
-
-    <table width="750px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff"
-           >
+    <table width="750px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff">
       <tr class=default>
         <td> <h4>Testi tulemused:</h4>              <div style="color: blue" ></div></td>
       </tr>
@@ -31,8 +26,7 @@
           <td width="100px"> {{a.result}}   %
           </td>
 
-
-          <td width="250px"> {{a.timestamp}}
+          <td width="250px"> {{ (a.timestamp) }}
           </td>
         </div>
       </tr>
@@ -48,22 +42,17 @@ let getResultList = function () {
   this.$http.get("http://localhost:8090/trainer/getresults")
       .then(result => this.resultSet = result.data)
 
-
 }
-
 
 export default {
   name: 'Coach',
   methods: {
-    getResultList: getResultList,
-
-
+    getResultList: getResultList
 
   },
   data: function () {
     return {
       resultSet: {},
-
     }
   },
 

@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">javaTrainer Home</router-link> |
-      <router-link to="/javaTrainer">Student</router-link> |
-      <router-link to="/coach">Coach</router-link>|
-      <router-link to="/login">Login</router-link>
+      <router-link to="/">javaTrainer</router-link>  |
+      <router-link to="/javaTrainer">Õpilane</router-link>  |
+      <router-link to="/coach">Õpetaja</router-link>  |
+      <router-link to="/login">Sisene</router-link>
     </div>
     <router-view/>
   </div>
