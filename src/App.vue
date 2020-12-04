@@ -2,13 +2,27 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">javaTrainer</router-link>  |
-      <router-link to="/javaTrainer">Õpilane</router-link>  |
+      <router-link v-if="token" to="/javaTrainer">Õpilane</router-link>  |
       <router-link to="/coach">Õpetaja</router-link>  |
       <router-link to="/login">Sisene</router-link>
     </div>
     <router-view/>
+
   </div>
 </template>
+
+<script>
+  export default {
+    data: function (){
+      return {
+        token: ""
+      }
+    },
+    created() {
+      this.token = localStorage.getItem('user-token')
+    }
+  }
+</script>
 
 <style>
 #app {

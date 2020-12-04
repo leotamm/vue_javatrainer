@@ -5,7 +5,7 @@
     <input type="text" name="username" v-model="input.username" placeholder="Kasutajanimi"/><br><br>
     <input type="password" name="password" v-model="input.password" placeholder="Parool"/><br><br>
     <button type="button" v-on:click="login()">Logi sisse</button>
-    <p v-if="state === 'show'"><button v-on:click="logout()">Logi välja</button></p>
+    <p><button v-on:click="logout()">Logi välja</button></p>
     <h5>{{ response }}</h5>
     <br><br><br><br>
     <h2>Loo uus kasutaja:</h2>
@@ -55,9 +55,9 @@ export default {
             .then(result => {
               this.response = result.data
               alert('Sisse logitud!')
-              localStorage.setItem('user-result', result.data)
+              localStorage.setItem('user-token', result.data)
               this.$http.defaults.headers.common['Authorization'] = "Bearer " + result.data
-              this.state = 'show'
+              location.reload()
             })
 
       }
