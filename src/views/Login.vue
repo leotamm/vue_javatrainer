@@ -35,6 +35,7 @@ export default {
         newuser: '',
         newpassword: ''
       },
+      // loginName: ''
     }
   },
 
@@ -43,6 +44,7 @@ export default {
       if (this.input.username === "" && this.input.password === "") {
         console.log("Sisselogimisel peavad nimi ja parool olema sisestatud!");
       } else {
+        //this.loginName = this.input.username
         let url = "http://localhost:8090/trainer/login"
         let requestBody = {
           userName: this.input.username,
@@ -50,7 +52,7 @@ export default {
           userClass: ''
         }
 
-        console.log(requestBody)
+        //console.log(requestBody)
         this.$http.post(url, requestBody)
             .then(result => {
               this.response = result.data

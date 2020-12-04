@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">javaTrainer</router-link>  |
-      <router-link v-if="token" to="/javaTrainer">Õpilane</router-link>  |
-      <router-link to="/coach">Õpetaja</router-link>  |
-      <router-link to="/login">Sisene</router-link>
+<!--      <router-link to="/">javaTrainer</router-link>  |-->
+      <router-link to="/login">Sisene</router-link> |
+      <router-link to="/javaTrainer">Õpilane</router-link>  |
+      <router-link v-if="token" to="/coach">Õpetaja</router-link>
+
+
     </div>
     <router-view/>
 
