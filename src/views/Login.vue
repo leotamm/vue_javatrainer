@@ -5,12 +5,13 @@
     <input type="text" name="username" v-model="input.username" placeholder="Kasutajanimi"/><br><br>
     <input type="password" name="password" v-model="input.password" placeholder="Parool"/><br><br>
     <button type="button" v-on:click="login()">Logi sisse</button>
+    <h5>{{ response }}</h5>
     <br><br><br><br>
     <h2>Loo uus kasutaja:</h2>
     <input type="text" name="newuser" v-model="input2.newuser" placeholder="Kasutajanimi"/><br><br>
     <input type="password" name="newpassword" v-model="input2.newpassword" placeholder="Parool"/><br><br>
-    <button type="button" v-on:click="create()">Loo uus kasutaja</button>
-    <div>{{ response }}</div>
+    <button type="button" v-on:click="create()">Loo uus kasutaja</button> <br>
+
   </div>
 
 </template>
@@ -44,11 +45,14 @@ export default {
           userPassword: this.input.password,
           userClass: ''
         }
+        //let requestBody= data.json;
         console.log(requestBody)
         this.$http.post(url, requestBody)
             .then(result => {
               this.response = result.data
               alert('Sisse logitud!')
+              localStorage.setItem('user-result', result.data)
+              this.$http.defaults.headers.common['Authorization'] = "Bearer " + result.data
             })
       }
     }
@@ -63,7 +67,7 @@ export default {
           userPassword: this.input2.newpassword,
           userClass: 'user'
         }
-        console.log(requestBody)
+        //console.log(requestBody)
         this.$http.post(url, requestBody)
             .then(result => {
               this.response = result.data
