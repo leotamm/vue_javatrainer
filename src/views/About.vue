@@ -1,9 +1,9 @@
 <template>
 
   <div class="about">
-    <h1>Hei, õpilane!</h1> <!-- peale sisselogimist, kuvame kujul "Hei, [nimi]!" -->
+    <h1>Hei {{mingitekst}} !!!</h1> <!-- peale sisselogimist, kuvame kujul "Hei, [nimi]!" -->
 
-    <input v-model.name="studentName" placeholder="Sisesta nimi" type="text" :disabled="isDisabled"> <!-- peale sisselogimist võta maha! -->
+<!--    <input v-model.name="studentName" placeholder="Sisesta nimi" type="text" :disabled="isDisabled"> -->
     <p><button v-on:click="getName()" :disabled="isDisabled" @click="changeSet('show')">ALUSTA TESTI</button></p>
 
     <table width="450px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff"
@@ -41,9 +41,10 @@ let getName = function () {
   this.isDisabled = true;
 }
 let submit = function () {
+  let userloginname = localStorage.getItem('username')
   this.hasSubmitButton = true;
   let url = "http://localhost:8090/trainer/submitAnswer";
-  let requestBody = {studentName: this.studentName, resultObject: []};
+  let requestBody = {studentName: userloginname, resultObject: []};
   for (let i = 0; i < this.questionSet.length; i++) {
     requestBody.resultObject.push({questionId: this.questionSet[i].q_id, answerId: this.questionSet[i].selectedAnswer});
     //push lisab lõppu ühe elemendi
@@ -70,6 +71,7 @@ export default {
   },
   data: function () {
     return {
+      mingitekst: localStorage.getItem('username'),
       state: 'hide',
       studentName: '',
       questionSet: {},

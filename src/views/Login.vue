@@ -44,7 +44,6 @@ export default {
       if (this.input.username === "" && this.input.password === "") {
         console.log("Sisselogimisel peavad nimi ja parool olema sisestatud!");
       } else {
-        //this.loginName = this.input.username
         let url = "http://localhost:8090/trainer/login"
         let requestBody = {
           userName: this.input.username,
@@ -58,6 +57,7 @@ export default {
               this.response = result.data
               alert('Sisse logitud!')
               localStorage.setItem('user-token', result.data)
+              localStorage.setItem('username', this.input.username)
               this.$http.defaults.headers.common['Authorization'] = "Bearer " + result.data
               location.reload()
             })
@@ -66,6 +66,7 @@ export default {
     },
     logout() {
       localStorage.removeItem('user-token')
+      localStorage.removeItem('username')
       location.reload()
       alert("Välja logitud!")
     }
