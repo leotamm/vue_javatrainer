@@ -14,6 +14,27 @@
         <td> <h4>Testi tulemused:</h4>              <div style="color: blue" ></div></td>
       </tr>
 
+      <table border="1">
+      <tr>
+          <td width="100px" >
+          <h4>Nr</h4>
+
+          </td>
+          <td width="250px"> <h4>Nimi</h4>
+          </td>
+
+          <td width="100px"> <h4>Tulemus</h4>
+
+          </td>
+
+          <td width="250px"> <h4>Aeg</h4>
+
+          </td>
+
+      </tr>
+    </table>
+
+
       <tr>
         <div v-for="(a, index) in resultSet">
 
@@ -32,11 +53,20 @@
       </tr>
 
     </table>
+
+
+
 <!--{{resultSet}}-->
   </div>
 </template>
 
 <script>
+
+let sortAscending = function ()
+{
+  this.$http.get("http://localhost:8090/trainer/sortscores")
+
+}
 
 let getResultList = function () {
   this.$http.get("http://localhost:8090/trainer/getresults")
@@ -47,7 +77,8 @@ let getResultList = function () {
 export default {
   name: 'Coach',
   methods: {
-    getResultList: getResultList
+    getResultList: getResultList,
+    sortAscending: sortAscending
 
   },
   data: function () {
