@@ -39,22 +39,33 @@
       </table>
       <tr>
         <div v-for="(a, index) in fullSet">
-          <td width="100px">{{ a.topicId }}</td>
+          <td width="100px">{{ getTopicName(a.topicId) }}</td>
           <td width="350px"> {{ a.question }}</td>
           <td width="350px"> {{ a.answer }}</td>
-          <td width="100px"> {{ (a.correct) }}</td>
+          <td width="100px"> {{ a.correct }}</td>
         </div>
       </tr>
     </table>
-
-
-
   </div>
 
 </template>
 
 <script>
 //import QuestionsAnswers from "@/components/QuestionsAnswers";
+
+let getTopicName = function(number) {
+  switch (number) {
+    case 1: return "Movies"; break;
+    case 2: return "Disney"; break;
+    case 3: return "Star Wars"; break;
+    case 4: return "Harry Potter"; break;
+    case 5: return "Friends"; break;
+    case 6: return "Game of Thrones"; break;
+    case 7: return "Music"; break;
+    default: return "Unknown"; break;
+  }
+
+}
 
 let getQuestionsAndAnswers = function () {
   this.questionsState = 'show'
@@ -102,12 +113,14 @@ export default {
       student_id: null,
       result: null,
       timestamp: null,
+      topicName: ''
     }
   },
   methods: {
     getResultList: getResultList,
     sort: sort,
-    getQuestionsAndAnswers: getQuestionsAndAnswers
+    getQuestionsAndAnswers: getQuestionsAndAnswers,
+    getTopicName: getTopicName
   },
 }
 </script>
