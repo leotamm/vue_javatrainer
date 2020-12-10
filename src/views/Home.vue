@@ -8,14 +8,11 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 import WelcomePage from '@/components/WelcomePage'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld,
     WelcomePage
   }
 }

@@ -50,17 +50,18 @@ export default {
         this.$http.post(url, requestBody)
             .then(result => {
               this.response = result.data
-              alert('Sisse logitud!')
               localStorage.setItem('user-token', result.data)
               localStorage.setItem('username', this.input.username)
               this.$http.defaults.headers.common['Authorization'] = "Bearer " + result.data
               location.reload()
+              alert('Sisse logitud!')
             })
       }
     },
     logout() {
       localStorage.removeItem('user-token')
       localStorage.removeItem('username')
+      localStorage.removeItem('list-length')
       location.reload()
       alert("Välja logitud!")
     }
@@ -79,6 +80,7 @@ export default {
         this.$http.post(url, requestBody)
             .then(result => {
               this.response2 = result.data
+              location.reload()
               alert('Kasutaja loodud!')
             })
       }

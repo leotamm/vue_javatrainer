@@ -1,16 +1,15 @@
 <template>
 
   <div class="about">
-    <h1>Hei, õpetaja!</h1> <!-- peale sisselogimist, kuvame kujul "Hei, [nimi]!" -->
-
+    <h1>Hei, õpetaja!</h1>
     <p><button v-on:click="getResultList">VAATA TULEMUSI</button></p>
-
     <ul align="centre"><h3><a href="http://localhost:8090/" target="_blank" rel="noopener">Küsimuste sisestamine
       andmebaasi</a></h3></ul>
-
-    <table width="720px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff"><table border="1">
-        <tr><td  width="100px"><h4 v-on:click="sort('r_l_id')">Nr</h4></td>
-          <td width="250px"><h4 v-on:click="sort('student_id')">Nimi</h4></td>
+    <table width="550px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff">
+      <table border="1">
+        <tr>
+          <td width="100px"><h4 v-on:click="sort('r_l_id')">Nr</h4></td>
+          <td width="180px"><h4 v-on:click="sort('student_id')">Nimi</h4></td>
           <td width="100px"><h4 v-on:click="sort('result')">Tulemus</h4></td>
           <td width="250px"><h4 v-on:click="sort('timestamp')">Aeg</h4></td>
         </tr>
@@ -18,7 +17,7 @@
       <tr>
         <div v-for="(a, index) in resultSet">
           <td width="100px">{{ a.resultId }}</td>
-          <td width="250px"> {{ a.name }}</td>
+          <td width="180px"> {{ a.name }}</td>
           <td width="100px"> {{ a.result }} %</td>
           <td width="250px"> {{ (a.timestamp) }}</td>
         </div>
@@ -37,7 +36,7 @@ let sort = function (column) {
           direction: this.direction
         }
       }
-  ).then (result => this.resultSet = result.data)
+  ).then(result => this.resultSet = result.data)
   if (this.direction === 'ASC') {
     this.direction = 'DESC'
   } else {
@@ -48,6 +47,7 @@ let sort = function (column) {
 let getResultList = function () {
   this.$http.get("http://localhost:8090/trainer/getresults")
       .then(result => this.resultSet = result.data)
+  localStorage.setItem('list-length', this.resultSet.length)
 }
 
 export default {
@@ -55,6 +55,7 @@ export default {
   data: function () {
     return {
       resultSet: {},
+      state: 'hide',
       direction: 'ASC',
       r_l_id: null,
       student_id: null,
@@ -80,5 +81,4 @@ export default {
 .notcorrect {
   background-color: #ffc8c8;
 }
-
 </style>

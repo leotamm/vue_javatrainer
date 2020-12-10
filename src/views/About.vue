@@ -1,7 +1,7 @@
 <template>
 
   <div class="about">
-    <h1>Hei {{mingitekst}} !!!</h1> <!-- peale sisselogimist, kuvame kujul "Hei, [nimi]!" -->
+    <h1>Hei, {{mingitekst}} !</h1> <!-- peale sisselogimist, kuvame kujul "Hei, [nimi]!" -->
 
 <!--    <input v-model.name="studentName" placeholder="Sisesta nimi" type="text" :disabled="isDisabled"> -->
     <p><button v-on:click="getName()" :disabled="isDisabled" @click="changeSet('show')">ALUSTA TESTI</button></p>
@@ -9,7 +9,7 @@
     <table width="450px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff"
            v-for="(a, index) in questionSet">
       <tr class=default v-bind:class="{correct: a.correct, notcorrect: !a.correct && hasSubmitButton=== true}">
-        <td>Küsimus teemast {{ index + 1 }}: <br> <h4>{{ a.question }}</h4> <div style="color: blue" ></div></td>
+        <td>Küsimus teemast {{ index + 1 }}: <br> <h4>{{ a.question }}</h4> <div style="color: #0000ff" ></div></td>
       </tr>
       <tr>
         <div v-for="b in a.answers">
@@ -21,7 +21,7 @@
         </div>
       </tr>
     </table>
-    <p v-if="state === 'show'"><button v-on:click="submit()" >ESITA VASTUSED</button></p><br>
+    <p v-if="state === 'show'"><button v-on:click="submit()" >ESITA VASTUSED</button></p>
     <div id="tulemus">
      <h2>{{score}}</h2>
     </div>
@@ -52,7 +52,7 @@ let submit = function () {
   this.$http.post(url, requestBody)
       .then(result => {
           this.resultList = result.data
-          this.score = "Sinu tulemus on : " + this.resultList.totalResult.testScore + "% !"
+          this.score = "Sinu tulemus on " + this.resultList.totalResult.testScore + "%"
           for(let i = 0; i < this.resultList.answers.length; i++){
             this.questionSet[i].correct  =this.resultList.answers[i].correct;
           }
@@ -89,9 +89,9 @@ export default {
   background-color: cornsilk;
 }
   .correct{
-    background-color: #d3ff8f;
+    background-color: yellowgreen;
   }
   .notcorrect {
-    background-color: #ffc8c8;
+    background-color: red;
   }
 </style>
