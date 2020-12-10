@@ -7,7 +7,9 @@
 
 <!--    <input v-model.name="studentName" placeholder="Sisesta nimi" type="text" :disabled="isDisabled"> -->
     <p><button v-on:click="getName()" :disabled="isDisabled" @click="changeSet('show')">ALUSTA TESTI</button></p>
+      <br>
     </div>
+    <br>
 
     <table width="450px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff"
            v-for="(a, index) in questionSet">
@@ -39,14 +41,14 @@
 <script>
 
 let getName = function () {
-  this.$http.get("http://localhost:8090/trainer/testpackage")
+  this.$http.get(this.host + "/trainer/testpackage")
       .then(result => this.questionSet = result.data)
   this.isDisabled = true;
 }
 let submit = function () {
   let userloginname = localStorage.getItem('username')
   this.hasSubmitButton = true;
-  let url = "http://localhost:8090/trainer/submitAnswer";
+  let url = this.host + "/trainer/submitAnswer";
   let requestBody = {studentName: userloginname, resultObject: []};
   for (let i = 0; i < this.questionSet.length; i++) {
     requestBody.resultObject.push({questionId: this.questionSet[i].q_id, answerId: this.questionSet[i].selectedAnswer});

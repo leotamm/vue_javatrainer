@@ -1,7 +1,8 @@
 <template>
   <div class="login">
     <div class="about" style="background-color:#efeaf0">
-    <h2>Logi sisse:</h2>
+
+      <h2>Logi sisse:</h2>
     <input type="text" name="username" v-model="input.username" placeholder="Kasutajanimi"/><br><br>
     <input type="password" name="password" v-model="input.password" placeholder="Parool"/><br><br>
     <button type="button" v-on:click="login()">Logi sisse</button>
@@ -64,8 +65,13 @@ export default {
       localStorage.removeItem('user-token')
       localStorage.removeItem('username')
       localStorage.removeItem('list-length')
-      location.reload()
+      //location.reload()
+      //router.go('home')
       alert("Välja logitud!")
+      this.$router.push({ name: '/' })
+      location.reload()
+
+
     }
     ,
     create() {
