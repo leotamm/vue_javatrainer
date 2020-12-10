@@ -39,7 +39,7 @@ export default {
   methods: {
     login: function () {
       if (this.input.username === "" && this.input.password === "") {
-        console.log("Sisselogimisel peavad nimi ja parool olema sisestatud!");
+        alert("Sisselogimisel peavad nimi ja parool olema sisestatud!");
       } else {
         let url = "http://localhost:8090/trainer/login"
         let requestBody = {
@@ -67,8 +67,8 @@ export default {
     }
     ,
     create() {
-      if (this.input.newuser === "" && this.input.newpassword === "") {
-        console.log("Uue kasutaja nimi ja parool olema sisestatud!");
+      if (this.input2.newuser === "" && this.input2.newpassword === "") {
+        alert("Uue kasutaja nimi ja parool olema sisestatud!");
       } else {
         let url = "http://localhost:8090/trainer/newUser"
         let requestBody = {
