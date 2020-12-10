@@ -1,11 +1,14 @@
 <template>
 
-  <div class="about">
-    <h1>Hei, õpetaja!</h1>
-    <p><button v-on:click="getResultList">VAATA TULEMUSI</button></p>
-    <p><button v-on:click="getQuestionsAndAnswers">KÜSIMUSTE ANDMEBAAS</button></p>
+
+  <div>
+    <div class="about" style="background-color:#efeaf0">
+      <h1>Hei, õpetaja!</h1>
+      <p><button v-on:click="getResultList">VAATA TULEMUSI</button></p>
+      <p><button v-on:click="getQuestionsAndAnswers">KÜSIMUSTE ANDMEBAAS</button></p>
     <ul align="centre"><h3><a href="http://localhost:8090/" target="_blank" rel="noopener">Küsimuste sisestamine
       andmebaasi</a></h3></ul>
+    </div><br>
     <table v-if="resultsState === 'show'" width="550px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff">
       <table border="1">
         <tr>

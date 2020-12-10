@@ -1,12 +1,14 @@
 <template>
   <div class="login">
+    <div class="about" style="background-color:#efeaf0">
     <h2>Logi sisse:</h2>
     <input type="text" name="username" v-model="input.username" placeholder="Kasutajanimi"/><br><br>
     <input type="password" name="password" v-model="input.password" placeholder="Parool"/><br><br>
     <button type="button" v-on:click="login()">Logi sisse</button>
-    <p><button v-on:click="logout()">Logi välja</button></p>
+    <p><button v-on:click="logout()">Logi välja</button></p><br>
+    </div>
 <!--    <h5>{{ response }}</h5>   -->
-    <br><br><br><br>
+    <br>
     <h2>Loo uus kasutaja:</h2>
     <input type="text" name="newuser" v-model="input2.newuser" placeholder="Kasutajanimi"/><br><br>
     <input type="password" name="newpassword" v-model="input2.newpassword" placeholder="Parool"/><br><br>

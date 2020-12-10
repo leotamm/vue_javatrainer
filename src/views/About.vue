@@ -1,10 +1,13 @@
 <template>
 
+
   <div class="about">
+    <div class="about" style="background-color:#efeaf0">
     <h1>Hei, {{mingitekst}} !</h1> <!-- peale sisselogimist, kuvame kujul "Hei, [nimi]!" -->
 
 <!--    <input v-model.name="studentName" placeholder="Sisesta nimi" type="text" :disabled="isDisabled"> -->
     <p><button v-on:click="getName()" :disabled="isDisabled" @click="changeSet('show')">ALUSTA TESTI</button></p>
+    </div>
 
     <table width="450px" align="centre" style="margin: 0px auto;" border="1" bgcolor="#f0f8ff"
            v-for="(a, index) in questionSet">
